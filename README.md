@@ -1,3 +1,5 @@
+This is just the syntax highlighting, yes.
+
 # Installation
 
 ## ELPA and MELPA
@@ -23,3 +25,7 @@ No way.
 3. ???
 
 4. PROFIT!
+
+# Screenshot
+
+![Screenshot](screenshot.png)
