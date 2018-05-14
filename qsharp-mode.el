@@ -1,0 +1,37 @@
+(defconst qsharp-mode-syntax-table
+  (let ((table (make-syntax-table)))
+    (modify-syntax-entry ?\/ ". 12b" table)
+    (modify-syntax-entry ?\n "> b" table)
+    (modify-syntax-entry ?\" "\"" table)
+    table))
+
+(defun regexp-keyword (name)
+  ((concat "\\b" name "\\b") . font-lock-keyword-face))
+
+(defun make-big-keyword (names)
+  (mapconcat
+    #'(lambda (name) (concat "\\b" name "\\b")) names "\\|"))
+
+(defun regexps (some-lock names)
+  `((,(make-big-keyword names) . ,some-lock)))
+
+(defconst qsharp-keywords '("set" "mutable" "let" "body" "operation" "using" "open" "namespace" "newtype" "adjoint" "auto" "controlled" "function" "new"))
+(defconst qsharp-constants '("One" "Zero" "PauliX" "PauliY" "PauliZ" "PauliI" "true" "false"))
+(defconst qsharp-builtins '("if" "elif" "else" "fail" "for" "in" "return" "repeat" "until" "fixup"))
+(defconst qsharp-functions '("M" "H" "CNOT" "CCNOT" "I" "Measure" "Message" "Assert" "AssertProb" "Exp" "ExpFrac" "R" "R1" "RFrac" "R1Frac" "Random" "Reset" "Resetall" "Rx" "Ry" "Rz" "S" "SWAP" "T" "X" "Y" "Z" "MultiX" "Length"))
+(defconst qsharp-types '("Qubit" "Bool" "Result" "Int" "Double" "Pauli" "Range" "String"))
+
+(defconst qsharp-highlightings
+  (append (regexps font-lock-keyword-face qsharp-keywords)
+	  (regexps font-lock-constant-face qsharp-constants)
+	  (regexps font-lock-builtin-face qsharp-builtins)
+	  (regexps font-lock-function-name-face qsharp-functions)
+	  (regexps font-lock-type-face qsharp-types)))
+
+(define-derived-mode qsharp-mode fundamental-mode "Q# mode"
+  "major mode for editing Q# code"
+  :syntax-table qsharp-mode-syntax-table
+  ;(font-lock-fontify-buffer)
+  (setq font-lock-defaults '(qsharp-highlightings)))
+
+(provide 'qsharp-mode)
