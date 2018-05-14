@@ -19,14 +19,17 @@
 (defconst qsharp-constants '("One" "Zero" "PauliX" "PauliY" "PauliZ" "PauliI" "true" "false"))
 (defconst qsharp-builtins '("if" "elif" "else" "fail" "for" "in" "return" "repeat" "until" "fixup"))
 (defconst qsharp-functions '("M" "H" "CNOT" "CCNOT" "I" "Measure" "Message" "Assert" "AssertProb" "Exp" "ExpFrac" "R" "R1" "RFrac" "R1Frac" "Random" "Reset" "Resetall" "Rx" "Ry" "Rz" "S" "SWAP" "T" "X" "Y" "Z" "MultiX" "Length"))
-(defconst qsharp-types '("Qubit" "Bool" "Result" "Int" "Double" "Pauli" "Range" "String"))
+(defconst qsharp-types '("Int" "Double" "String" "Bool" "Qubit" "Pauli" "Result" "Range"))
 
 (defconst qsharp-highlightings
   (append (regexps font-lock-keyword-face qsharp-keywords)
 	  (regexps font-lock-constant-face qsharp-constants)
 	  (regexps font-lock-builtin-face qsharp-builtins)
 	  (regexps font-lock-function-name-face qsharp-functions)
-	  (regexps font-lock-type-face qsharp-types)))
+	  (regexps font-lock-type-face qsharp-types)
+	  '(("\\(mutable\\|let\\|set\\) \\(\\w+\\)\\b" . (2 font-lock-variable-name-face)))
+	  '(("new \\(\\w+\\)\\b" . (1 font-lock-type-face)))
+	  '(("\\b\\w+ : \\(\\w+\\)\\b" . (1 font-lock-type-face)))))
 
 (define-derived-mode qsharp-mode fundamental-mode "Q# mode"
   "major mode for editing Q# code"
