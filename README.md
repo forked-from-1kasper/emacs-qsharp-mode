@@ -6,13 +6,13 @@ No way.
 
 ## Manual installation
 
-1. Clone this repo to ~/.emacs.d/qsharp-mode/:
+1. Clone this repo to `~/.emacs.d/qsharp-mode/`:
 
     ```
     git clone git://github.com/forked-from-1kasper/emacs-qsharp-mode`
     ```
 
-2. Add the following to your init.el:
+2. Add the following to your `init.el`:
 
     ```lisp
     (add-to-list 'load-path "~/.emacs.d/qsharp-mode/")
