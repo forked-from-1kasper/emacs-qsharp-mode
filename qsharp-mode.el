@@ -34,7 +34,6 @@
 (define-derived-mode qsharp-mode fundamental-mode "Q# mode"
   "major mode for editing Q# code"
   :syntax-table qsharp-mode-syntax-table
-  ;(font-lock-fontify-buffer)
   (setq font-lock-defaults '(qsharp-highlightings)))
 
 (provide 'qsharp-mode)
