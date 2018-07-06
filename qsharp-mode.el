@@ -18,7 +18,7 @@
 (defconst qsharp-keywords '("set" "mutable" "let" "body" "operation" "using" "open" "namespace" "newtype" "adjoint" "auto" "controlled" "function" "new"))
 (defconst qsharp-constants '("One" "Zero" "PauliX" "PauliY" "PauliZ" "PauliI" "true" "false"))
 (defconst qsharp-builtins '("if" "elif" "else" "fail" "for" "in" "return" "repeat" "until" "fixup"))
-(defconst qsharp-functions '("M" "H" "CNOT" "CCNOT" "I" "Measure" "Message" "Assert" "AssertProb" "Exp" "ExpFrac" "R" "R1" "RFrac" "R1Frac" "Random" "Reset" "Resetall" "Rx" "Ry" "Rz" "S" "SWAP" "T" "X" "Y" "Z" "MultiX" "Length"))
+(defconst qsharp-functions '("M" "H" "CNOT" "CCNOT" "I" "Measure" "Message" "Assert" "AssertProb" "Exp" "ExpFrac" "R" "R1" "RFrac" "R1Frac" "Random" "Reset" "ResetAll" "Rx" "Ry" "Rz" "S" "SWAP" "T" "X" "Y" "Z" "MultiX" "Length"))
 (defconst qsharp-types '("Int" "Double" "String" "Bool" "Qubit" "Pauli" "Result" "Range"))
 
 (defconst qsharp-highlightings
