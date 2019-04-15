@@ -1,3 +1,15 @@
+;;; qsharp-mode.el --- Programming mode for the Q# language.
+;; Author: forked-from-1kasper
+;; Keywords: languages, q#, quantum
+;; Package-Requires: ((emacs "24.1"))
+
+;; This file is NOT part of GNU Emacs.
+
+;;; Commentary:
+;;  Add a Q# mode to Emacs.
+
+;;; Code:
+
 (defconst qsharp-mode-syntax-table
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?\/ ". 12b" table)
@@ -37,3 +49,5 @@
   (setq font-lock-defaults '(qsharp-highlightings)))
 
 (provide 'qsharp-mode)
+
+;;; qsharp-mode.el ends here
