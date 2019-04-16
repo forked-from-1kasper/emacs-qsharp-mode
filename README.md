@@ -4,13 +4,21 @@ This is just the syntax highlighting, yes.
 
 ## ELPA and MELPA
 
-No way.
+Package management via `package.el` is allowed (thanks to [anuragm](https://github.com/anuragm)):
+
+```lisp
+(use-package qsharp-mode
+  :quelpa
+  (qsharp-mode :fetcher github :repo "forked-from-1kasper/emacs-qsharp-mode")
+  :commands qsharp-mode
+  :mode (("\\.qs$" . qsharp-mode)))
+```
 
 ## Manual installation
 
 1. Clone this repo to `~/.emacs.d/qsharp-mode/`:
 
-    ```
+    ```bash
     git clone git://github.com/forked-from-1kasper/emacs-qsharp-mode`
     ```
 
