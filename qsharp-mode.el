@@ -1,31 +1,52 @@
-;;; qsharp-mode.el --- Programming mode for the Q# language.
-;; Author: forked-from-1kasper
-;; Keywords: languages, q#, quantum
-;; Package-Requires: ((emacs "24.1"))
+;;; qsharp-mode.el --- Programming mode for the Q# language  -*- lexical-binding: t; -*-
 
-;; This file is NOT part of GNU Emacs.
+;; Copyright (C) 2023  Shen, Jen-Chieh
+
+;; Author: Siegmentation Fault <siegmentationfault@yandex.ru>
+;; Maintainer: Siegmentation Fault <siegmentationfault@yandex.ru>
+;; URL: https://github.com/forked-from-1kasper/emacs-qsharp-mode
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "24.1"))
+;; Keywords: languages, q#, quantum
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;;  Add a Q# mode to Emacs.
+;;
+;; Add a Q# mode to Emacs.
+;;
 
 ;;; Code:
 
 (defconst qsharp-mode-syntax-table
   (let ((table (make-syntax-table)))
-    (modify-syntax-entry ?\/ ". 12b" table)
-    (modify-syntax-entry ?\n "> b" table)
-    (modify-syntax-entry ?\" "\"" table)
-    table))
+	(modify-syntax-entry ?\/ ". 12b" table)
+	(modify-syntax-entry ?\n "> b" table)
+	(modify-syntax-entry ?\" "\"" table)
+	table))
 
-(defun regexp-keyword (name)
-  ((concat "\\b" name "\\b") . font-lock-keyword-face))
+(defun qsharp-regexp-keyword (name)
+  `((concat "\\b" name "\\b") . font-lock-keyword-face))
 
-(defun make-big-keyword (names)
+(defun qsharp-make-big-keyword (names)
   (mapconcat
-    #'(lambda (name) (concat "\\b" name "\\b")) names "\\|"))
+   #'(lambda (name) (concat "\\b" name "\\b")) names "\\|"))
 
-(defun regexps (some-lock names)
-  `((,(make-big-keyword names) . ,some-lock)))
+(defun qsharp-regexps (some-lock names)
+  `((,(qsharp-make-big-keyword names) . ,some-lock)))
 
 (defconst qsharp-keywords '("set" "mutable" "let" "body" "operation" "using" "open" "namespace" "newtype" "adjoint" "auto" "controlled" "function" "new"))
 (defconst qsharp-constants '("One" "Zero" "PauliX" "PauliY" "PauliZ" "PauliI" "true" "false"))
@@ -34,20 +55,22 @@
 (defconst qsharp-types '("Int" "Double" "String" "Bool" "Qubit" "Pauli" "Result" "Range"))
 
 (defconst qsharp-highlightings
-  (append (regexps font-lock-keyword-face qsharp-keywords)
-	  (regexps font-lock-constant-face qsharp-constants)
-	  (regexps font-lock-builtin-face qsharp-builtins)
-	  (regexps font-lock-function-name-face qsharp-functions)
-	  (regexps font-lock-type-face qsharp-types)
-	  '(("\\(mutable\\|let\\|set\\) \\(\\w+\\)\\b" . (2 font-lock-variable-name-face)))
-	  '(("new \\(\\w+\\)\\b" . (1 font-lock-type-face)))
-	  '(("\\b\\w+ : \\(\\w+\\)\\b" . (1 font-lock-type-face)))))
+  (append (qsharp-regexps font-lock-keyword-face qsharp-keywords)
+		  (qsharp-regexps font-lock-constant-face qsharp-constants)
+		  (qsharp-regexps font-lock-builtin-face qsharp-builtins)
+		  (qsharp-regexps font-lock-function-name-face qsharp-functions)
+		  (qsharp-regexps font-lock-type-face qsharp-types)
+		  '(("\\(mutable\\|let\\|set\\) \\(\\w+\\)\\b" . (2 font-lock-variable-name-face)))
+		  '(("new \\(\\w+\\)\\b" . (1 font-lock-type-face)))
+		  '(("\\b\\w+ : \\(\\w+\\)\\b" . (1 font-lock-type-face)))))
 
 (define-derived-mode qsharp-mode fundamental-mode "Q# mode"
   "major mode for editing Q# code"
   :syntax-table qsharp-mode-syntax-table
   (setq font-lock-defaults '(qsharp-highlightings)))
 
-(provide 'qsharp-mode)
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.qs\\'" . qsharp-mode))
 
+(provide 'qsharp-mode)
 ;;; qsharp-mode.el ends here
