@@ -64,6 +64,7 @@
 		  '(("new \\(\\w+\\)\\b" . (1 font-lock-type-face)))
 		  '(("\\b\\w+ : \\(\\w+\\)\\b" . (1 font-lock-type-face)))))
 
+;;;###autoload
 (define-derived-mode qsharp-mode fundamental-mode "Q# mode"
   "major mode for editing Q# code"
   :syntax-table qsharp-mode-syntax-table
